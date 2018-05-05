@@ -4,10 +4,12 @@ import pygame
 from WorldInterface import *
 from Graphics import *
 from Keyboard import *
+import Sprite
 
 def run_game( world, game_state = {}, fps = 24 ):
 
     pygame.init()
+    Sprite.font_init()
 
     screen = pygame.display.set_mode((640, 480))
     back_colour = ( 255, 0, 0 )
@@ -18,7 +20,7 @@ def run_game( world, game_state = {}, fps = 24 ):
     screen.blit( background, owl )
 
     timer = pygame.time.Clock()
-    #world.reset()
+    world.reset(game_state)
 
     game_state["screen"] = screen
     game_state["clock"] = timer
