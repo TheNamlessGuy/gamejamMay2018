@@ -15,7 +15,7 @@ class Level1(Level):
         Level.__init__(self)
 
     def update(self, gs):
-        self._update(gs)
+        self._update(gs, 'screen-normal-end')
 
     def reset(self, gs):
         self._reset(gs)

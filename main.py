@@ -5,11 +5,15 @@ from LevelSelect import *
 from Level1 import *
 from Level2 import *
 from MainMenu import *
+from NormalEnd import *
+from FinalEnd import *
 
 if __name__ == '__main__':
     game_state = {}
     game_state['screen-mainmenu'] = MainMenu()
     game_state['screen-levelselect'] = LevelSelect()
+    game_state['screen-normal-end'] = NormalEnd()
+    game_state['screen-final-end'] = FinalEnd()
 
     game_state['level-1'] = Level1()
     game_state['level-2'] = Level2()

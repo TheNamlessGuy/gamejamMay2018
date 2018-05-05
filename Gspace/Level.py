@@ -47,8 +47,10 @@ class Level(WorldInterface):
             y += tilesize
             x = start_x
 
-    def _update(self, gs):
-        self.player.update(gs, self.tiles)
+    def _update(self, gs, winscreen):
+        win = self.player.update(gs, self.tiles)
+        if win:
+            return gs[winscreen]
 
         if gs['keyboard']['ctrl-reset']:
             gs['keyboard']['ctrl-reset'] -= 1
