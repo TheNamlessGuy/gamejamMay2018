@@ -5,8 +5,12 @@ from LevelSelect import *
 from Level1 import *
 from Level2 import *
 from MainMenu import *
+import pygame
+
+GAME_TITLE = "Coyote King of the Bouncing Palace Realm"
 
 if __name__ == '__main__':
+    pygame.display.set_caption("lul")
     game_state = {}
     game_state['screen-mainmenu'] = MainMenu()
     game_state['screen-levelselect'] = LevelSelect()
@@ -16,4 +20,4 @@ if __name__ == '__main__':
 
     game_state['blur'] = False
     game_state['camera'] = Vec2( 0.0, 0.0 )
-    run_game(game_state['screen-mainmenu'], game_state, 24)
+    run_game(game_state['screen-mainmenu'], game_state, 24, GAME_TITLE)

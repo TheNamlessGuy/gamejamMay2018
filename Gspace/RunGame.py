@@ -5,10 +5,11 @@ from WorldInterface import *
 from Graphics import *
 from Keyboard import *
 
-def run_game( world, game_state = {}, fps = 24 ):
+def run_game( world, game_state = {}, fps = 24, game_title="pygame window" ):
 
     pygame.init()
-
+    pygame.display.set_caption(game_title)
+    
     screen = pygame.display.set_mode((640, 480))
     back_colour = ( 255, 0, 0 )
     background = pygame.Surface( screen.get_size() )
