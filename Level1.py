@@ -5,21 +5,20 @@ from Player import *
 
 class Level1(Level):
     def __init__(self):
+        self.level = (
+            (1, 1, 1, 1, 1, 1, 1, 1),
+            (1, 1, 1, 0, 0, 1, 1, 1),
+            (1, 3, 0, 0, 0, 0, 2, 1),
+            (1, 1, 1, 0, 0, 1, 1, 1),
+            (1, 1, 1, 1, 1, 1, 1, 1)
+        )
         Level.__init__(self)
-        self.level = [
-            [1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 1, 0, 0, 1, 1, 1],
-            [1, 3, 0, 0, 0, 0, 2, 1],
-            [1, 1, 1, 0, 0, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1]
-        ]
-        self._load_tiles(70)
 
     def update(self, gs):
-        self.player.update(gs)
+        self.player.update(gs, self)
 
     def reset(self, gs):
-        self.player = Player(Vec2(320, 240))
+        self.player = Player(self.tiles['start'][0].pos)
         
         self.sprites = []
 
