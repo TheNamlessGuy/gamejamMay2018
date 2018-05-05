@@ -10,7 +10,7 @@ class Player(WorldInterface):
         WorldInterface.__init__(self)
         
         #Player vars
-        self.player = (Sprite(None, Vec2(start_pos.x, start_pos.y), (64, 64)))
+        self.player = (Sprite(None, Vec2(start_pos.x, start_pos.y), (114, 114)))
         self.vel = Vec2(0,0)
         
         #Res
