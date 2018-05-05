@@ -6,6 +6,9 @@ class LevelSelect(WorldInterface):
     def __init__(self):
         WorldInterface.__init__(self)
 
+        self.arm_angles = [0, 0, 0]
+        self.arm_positions = [Vec2(0,0), Vec2(0,0), Vec2(0,0)]
+
     def update(self, gs):
         if gs['keyboard']['ctrl-up']:
             self.current_level -= 1
@@ -34,4 +37,8 @@ class LevelSelect(WorldInterface):
 
         self.current_level = 0
         self.arrow = Sprite(load_image('res/text/arrow.png'), Vec2(20, self.levels[self.current_level][1].pos.y), (35, 50))
+
+        self.hand = Sprite(load_image('res/pointing_arm.png'), Vec2(30, 30), Vec2(30,30))
+        
         self.sprites.append(self.arrow)
+        self.sprites.append(self.hand)
