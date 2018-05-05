@@ -10,7 +10,7 @@ class Player(WorldInterface):
         WorldInterface.__init__(self)
         
         #Player vars
-        self.player = (Sprite(None, Vec2(start_pos.x, start_pos.y), (114, 114)))
+        self.player = (Sprite(None, Vec2(start_pos.x, start_pos.y), (35, 35)))
         self.vel = Vec2(0,0)
         
         #Res
@@ -28,7 +28,9 @@ class Player(WorldInterface):
         
         self.player.image = self.res['player_right'][0]
         
-    def update(self, game_state):
+    def update(self, game_state, tiles):
+        
+        #Movement
         delta_vel = Vec2(0, 0)
         
         if game_state['keyboard']['ctrl-up']:
@@ -46,11 +48,15 @@ class Player(WorldInterface):
         self.player.pos.x += self.vel.x
         self.player.pos.y += self.vel.y
         
-    def collision(self, world):
-        #Check collision with each block
+        #Solid collision
         
-        #Check collision with each END
-        pass
+        
+        #Win collision
+        if collides_with(self.player.pos, (35,35), tiles['goal'][0].pos, (40,40)):
+            print("WINRAR: Evaluation License")
+            return True
+        
+        return False
         
     def reset(self, game_state): 
         pass

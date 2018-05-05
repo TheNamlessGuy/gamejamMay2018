@@ -48,7 +48,7 @@ class Level(WorldInterface):
             x = start_x
 
     def _update(self, gs):
-        self.player.update(gs)#, self)
+        self.player.update(gs, self.tiles)
 
         if gs['keyboard']['ctrl-reset']:
             gs['keyboard']['ctrl-reset'] -= 1
