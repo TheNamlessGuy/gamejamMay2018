@@ -54,12 +54,10 @@ class Player(WorldInterface):
                 self.vel.x = 0
                 self.vel.y = 0
         
-        
-        
         #Win collision
-        if collides_with(self.player.pos, (28,35), tiles['goal'][0].pos, (40,40)):
-            print("WINRAR: Evaluation License")
-            return True
+        for goal in tiles['goal']:
+            if collides_with(self.player.pos, (28,35), goal.pos, (40,40)):
+                return True
         
         return False
         
