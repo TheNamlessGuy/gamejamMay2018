@@ -5,7 +5,6 @@ from LevelSelect import *
 from Level1 import *
 from Level2 import *
 from MainMenu import *
-import pygame
 
 GAME_TITLE = "Coyote King of the Bouncing Palace Realm"
 
