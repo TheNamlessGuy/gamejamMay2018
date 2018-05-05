@@ -32,9 +32,9 @@ class Player(WorldInterface):
         delta_vel = Vec2(0, 0)
         
         if game_state['keyboard']['ctrl-up']:
-            delta_vel.y += VELSPEED
-        if game_state['keyboard']['ctrl-down']:
             delta_vel.y -= VELSPEED
+        if game_state['keyboard']['ctrl-down']:
+            delta_vel.y += VELSPEED
         if game_state['keyboard']['ctrl-left']:
             delta_vel.x -= VELSPEED
         if game_state['keyboard']['ctrl-right']:
