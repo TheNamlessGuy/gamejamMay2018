@@ -10,7 +10,7 @@ class Player(WorldInterface):
         WorldInterface.__init__(self)
         
         #Player vars
-        self.player = (Sprite(None, Vec2(start_pos.x, start_pos.y), Vec2(64, 64)))
+        self.player = (Sprite(None, Vec2(start_pos.x, start_pos.y), (114, 114)))
         self.vel = Vec2(0,0)
         
         #Res
@@ -26,8 +26,10 @@ class Player(WorldInterface):
                                     load_image("res/player/running_left_3.png"), \
                                     load_image("res/player/running_left_4.png")]
         
+        self.player.image = self.res['player_right'][0]
+        
     def update(self, game_state):
-        delta_vel = Vec2(0, -GRAVITY)
+        delta_vel = Vec2(0, 0)
         
         if game_state['keyboard']['ctrl-up']:
             delta_vel.y += VELSPEED
