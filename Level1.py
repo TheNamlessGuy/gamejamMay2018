@@ -15,15 +15,7 @@ class Level1(Level):
         Level.__init__(self)
 
     def update(self, gs):
-        self.player.update(gs, self)
+        self._update(gs)
 
     def reset(self, gs):
-        self.player = Player(self.tiles['start'][0].pos)
-        
-        self.sprites = []
-
-        for tiletype in self.tiles:
-            for tile in self.tiles[tiletype]:
-                self.sprites.append(tile)
-
-        self.sprites.append(self.player.player)
+        self._reset(gs)

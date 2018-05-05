@@ -3,6 +3,7 @@
 from WorldInterface import *
 from Sprite import *
 from Vec2 import *
+from Player import *
 
 class Level(WorldInterface):
     def __init__(self):
@@ -20,18 +21,10 @@ class Level(WorldInterface):
             7: 'bpadl',
             8: 'rose'
         }
-        
-        self.tiles = {
-            'air': [],
-            'wall': [],
-            'goal': [],
-            'start': [],
-            'bpadu': [],
-            'bpadd': [],
-            'bpadr': [],
-            'bpadl': [],
-            'rose': []
-        }
+
+        self.tiles = {}
+        for key in self._tile_translator:
+            self.tiles[self._tile_translator[key]] = []
 
         self._load_tiles()
 
@@ -53,3 +46,22 @@ class Level(WorldInterface):
                 x += tilesize
             y += tilesize
             x = start_x
+
+    def _update(self, gs):
+        self.player.update(gs)#, self)
+
+        if gs['keyboard']['ctrl-reset']:
+            gs['keyboard']['ctrl-reset'] -= 1
+            self.reset(gs)
+            return
+
+    def _reset(self, gs):
+        self.player = Player(self.tiles['start'][0].pos)
+
+        self.sprites = []
+
+        for tiletype in self.tiles:
+            for tile in self.tiles[tiletype]:
+                self.sprites.append(tile)
+
+        self.sprites.append(self.player.player)

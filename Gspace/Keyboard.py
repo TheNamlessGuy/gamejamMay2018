@@ -11,6 +11,7 @@ class Keyboard:
         self.key_variables['ctrl-right'] = [pygame.K_RIGHT, pygame.K_d]
         self.key_variables['ctrl-action'] = [pygame.K_SPACE]
         self.key_variables['ctrl-debug'] = [pygame.K_0]
+        self.key_variables['ctrl-reset'] = [pygame.K_r]
 
         self.keys_down['ctrl-up'] = 0
         self.keys_down['ctrl-down'] = 0
@@ -18,6 +19,7 @@ class Keyboard:
         self.keys_down['ctrl-right'] = 0
         self.keys_down['ctrl-action'] = 0
         self.keys_down['ctrl-debug'] = 0
+        self.keys_down['ctrl-reset'] = 0
 
     def update(self, pygame):
         for event in pygame.event.get():
