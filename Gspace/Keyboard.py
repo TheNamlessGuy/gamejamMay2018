@@ -27,6 +27,7 @@ class Keyboard:
             for key in self.key_variables:
                 if event.key in self.key_variables[key]:
                     self.keys_down[key] += 1 if event.type == pygame.KEYDOWN else -1
+                    if self.keys_down[key] < 0: self.keys_down[key] = 0
                     break
 
         return True
@@ -34,3 +35,6 @@ class Keyboard:
     def __getitem__(self, key):
         if key not in self.keys_down: return False
         return (self.keys_down[key] > 0)
+
+    def __setitem__(self, key, value):
+        self.keys_down[key] = value
