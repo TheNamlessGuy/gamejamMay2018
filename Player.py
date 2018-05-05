@@ -25,22 +25,39 @@ class Player(WorldInterface):
                                     load_image("res/player/running_left_2.png"), \
                                     load_image("res/player/running_left_3.png"), \
                                     load_image("res/player/running_left_4.png")]
-        
-        self.player.image = self.res['player_right'][0]
+
+        self.current_sprite = 0
+        self.switch_frame_timer = 3
+        self.current_res = 'player_right'
+        self.player.image = self.res[self.current_res][self.current_sprite]
         
     def update(self, game_state, tiles):
         
         #Movement
         delta_vel = Vec2(0, 0)
+
+        self.switch_frame_timer -= 1
+        if self.switch_frame_timer == 0:
+            print "SWITCH FRAME"
+            self.current_sprite = (self.current_sprite + 1) % 5
+            self.switch_frame_timer = 3
         
         if game_state['keyboard']['ctrl-up']:
             delta_vel.y -= VELSPEED
         if game_state['keyboard']['ctrl-down']:
             delta_vel.y += VELSPEED
         if game_state['keyboard']['ctrl-left']:
+            if self.current_res != 'player_left':
+                self.current_sprite = 0
+                self.current_res = 'player_left'
             delta_vel.x -= VELSPEED
         if game_state['keyboard']['ctrl-right']:
+            if self.current_res != 'player_right':
+                self.current_sprite = 0
+                self.current_res = 'player_right'
             delta_vel.x += VELSPEED
+
+        self.player.image = self.res[self.current_res][self.current_sprite]
         
         self.vel.x += delta_vel.x
         self.vel.y += delta_vel.y
@@ -60,8 +77,3 @@ class Player(WorldInterface):
                 return True
         
         return False
-        
-    def reset(self, game_state): 
-        pass
-        
-        

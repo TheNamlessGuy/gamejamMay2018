@@ -17,7 +17,7 @@ class Level2(Level):
         Level.__init__(self)
 
     def update(self, gs):
-        self._update(gs, 'screen-final-end')
+        return self._update(gs, 'screen-final-end')
 
     def reset(self, gs):
         self._reset(gs)

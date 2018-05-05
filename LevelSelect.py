@@ -22,7 +22,6 @@ class LevelSelect(WorldInterface):
         elif gs['keyboard']['ctrl-action']:
             return gs[self.levels[self.current_level][0]]
 
-        self.arrow.pos.y = self.levels[self.current_level][1].pos.y
         self.hand.pos = self.arm_positions[self.current_level]
         self.hand.angle = self.arm_angles[self.current_level]
         self.hand.size = self.arm_sizes[self.current_level]
@@ -48,6 +47,5 @@ class LevelSelect(WorldInterface):
             self.arm_sizes[self.current_level],
             self.arm_angles[self.current_level]
         )
-        
-        self.sprites.append(self.arrow)
+
         self.sprites.append(self.hand)
