@@ -1,4 +1,3 @@
-
 #encoding: utf-8
 
 from Gspace import *
@@ -14,13 +13,14 @@ class Level1(Level):
             [1, 1, 1, 0, 0, 1, 1, 1],
             [1, 1, 1, 1, 1, 1, 1, 1]
         ]
-        self._load_tiles()
-        self.player = Player(Vec2(320, 240))
+        self._load_tiles(70)
 
     def update(self, gs):
         self.player.update(gs)
 
     def reset(self, gs):
+        self.player = Player(Vec2(320, 240))
+        
         self.sprites = []
 
         for tiletype in self.tiles:

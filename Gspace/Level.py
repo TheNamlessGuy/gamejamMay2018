@@ -33,14 +33,13 @@ class Level(WorldInterface):
             8: 'rose'
         }[i]
 
-    def _get_start_x(self, tilesize):
-        return 320 - ((len(self.level[0]) / 2) * tilesize) - (tilesize / 2)
+    def _get_startvalue(self, tilesize, levelsize, initial):
+        return initial - ((levelsize / 2.0) * tilesize) + (tilesize / 2)
 
-    def _load_tiles(self):
-        tilesize = 40
-        start_x = self._get_start_x(tilesize)
+    def _load_tiles(self, tilesize):
+        start_x = self._get_startvalue(tilesize, len(self.level[0]), 320)
         x = start_x
-        y = 0
+        y = self._get_startvalue(tilesize, len(self.level), 240)
 
         for row in self.level:
             for col in row:

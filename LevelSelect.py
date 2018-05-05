@@ -25,13 +25,13 @@ class LevelSelect(WorldInterface):
 
         # Y offset between levels: 70 (height + 20)
         self.levels = [
-            ('level-1', Sprite(text_to_sprite('Lvl 1'), Vec2(50, 20), (35, 50))),
-            ('level-2', Sprite(text_to_sprite('Lvl 2'), Vec2(50, 90), (35, 50))),
-            ('level-3', Sprite(text_to_sprite('Lvl 3'), Vec2(50, 160), (35, 50)))
+            ('level-1', Sprite(load_image('res/text/Lvl1.png'), Vec2(75,  20), (75, 50))),
+            ('level-2', Sprite(load_image('res/text/Lvl2.png'), Vec2(75,  90), (75, 50))),
+            ('level-3', Sprite(load_image('res/text/Lvl3.png'), Vec2(75, 160), (75, 50)))
         ]
         for level in self.levels:
             self.sprites.append(level[1])
 
         self.current_level = 0
-        self.arrow = Sprite(text_to_sprite('>'), Vec2(20, self.levels[self.current_level][1].pos.y), (25, 25))
+        self.arrow = Sprite(load_image('res/text/arrow.png'), Vec2(20, self.levels[self.current_level][1].pos.y), (35, 50))
         self.sprites.append(self.arrow)
