@@ -1,6 +1,6 @@
 #encodng utf-8
 
-from Gspace import WorldInterface, Sprite, load_mage, collides_with, Vec2
+from Gspace import WorldInterface, Sprite, load_image, collides_with, Vec2
 
 VELSPEED = 1
 GRAVITY = 0.6
@@ -15,34 +15,34 @@ class Player(WorldInterface):
         
         #Res
         self.res = {}
-        self.res['player_right'] = [load_image("res/player_standing_right.png"), \
-                                    load_image("res/player_running_right_1.png"), \
-                                    load_image("res/player_running_right_2.png"), \
-                                    load_image("res/player_running_right_3.png"), \
-                                    load_image("res/player_running_right_4.png")]
-        self.res['player_left'] = [load_image("res/player_standing_left.png"), \
-                                    load_image("res/player_running_left_1.png"), \
-                                    load_image("res/player_running_left_2.png"), \
-                                    load_image("res/player_running_left_3.png"), \
-                                    load_image("res/player_running_left_4.png")]
+        self.res['player_right'] = [load_image("res/player/standing_right.png"), \
+                                    load_image("res/player/running_right_1.png"), \
+                                    load_image("res/player/running_right_2.png"), \
+                                    load_image("res/player/running_right_3.png"), \
+                                    load_image("res/player/running_right_4.png")]
+        self.res['player_left'] = [load_image("res/player/standing_left.png"), \
+                                    load_image("res/player/running_left_1.png"), \
+                                    load_image("res/player/running_left_2.png"), \
+                                    load_image("res/player/running_left_3.png"), \
+                                    load_image("res/player/running_left_4.png")]
         
     def update(self, game_state):
         delta_vel = Vec2(0, -GRAVITY)
         
-        if game_state['keyboard']['ctrl-up']
+        if game_state['keyboard']['ctrl-up']:
             delta_vel.y += VELSPEED
-        if game_state['keyboard']['ctrl-down']
+        if game_state['keyboard']['ctrl-down']:
             delta_vel.y -= VELSPEED
-        if game_state['keyboard']['ctrl-left']
+        if game_state['keyboard']['ctrl-left']:
             delta_vel.x -= VELSPEED
-        if game_state['keyboard']['ctrl-right']
+        if game_state['keyboard']['ctrl-right']:
             delta_vel.x += VELSPEED
         
-        vel.x += delta_vel.x
-        vel.y += delta_vel.y
+        self.vel.x += delta_vel.x
+        self.vel.y += delta_vel.y
         
-        self.player.pos.x += vel.x
-        self.player.pos.y += vel.y
+        self.player.pos.x += self.vel.x
+        self.player.pos.y += self.vel.y
         
     def collision(self, world):
         #Check collision with each block
