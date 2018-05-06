@@ -15,10 +15,10 @@ def load_image( path ):
         return sprite
     else:
         return __sprite_db[ path ]
-    
+
 # override this class to add features
 class Sprite:
-    def __init__( self, image, pos, size, angle=0.0, z=0, flip=False ):
+    def __init__( self, image, pos, size, angle=0.0, z=0, flip=False, rotation=None ):
         self.image          = image
         self.pos            = pos
         self.size           = size
@@ -26,4 +26,4 @@ class Sprite:
         self.z              = z
         self.special_fx_id  = 0 # ugly hack that works <3
         self.flip           = flip
-
+        self.rotation       = rotation

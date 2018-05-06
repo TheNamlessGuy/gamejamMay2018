@@ -31,6 +31,9 @@ class Player(WorldInterface):
         self.current_res = 'player_right'
         self.player.image = self.res[self.current_res][self.current_sprite]
 
+        self.rotation_speed = 0
+        self.player.rotation = self.rotation_speed
+
     def update(self, game_state, tiles):
 
         #Movement
@@ -58,6 +61,9 @@ class Player(WorldInterface):
 
         self.player.image = self.res[self.current_res][self.current_sprite]
 
+        if (self.rotation_speed > 0): self.rotation_speed -= 0.5
+        self.player.rotation = (self.player.rotation + self.rotation_speed) % 360
+
         self.vel.x += delta_vel.x
         self.vel.y += delta_vel.y
 
@@ -67,6 +73,8 @@ class Player(WorldInterface):
         #Solid collision
         for wall in tiles['wall']:
             if collides_with(self.player.pos, (28,35), wall.pos, (40,40)):
+                if self.rotation_speed < 90:
+                    self.rotation_speed += 5
                 self.vel.x = 0
                 self.vel.y = 0
 
