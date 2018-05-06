@@ -37,6 +37,8 @@ class Player(WorldInterface):
 
     def update(self, game_state, tiles):
 
+        hit_wall = False
+
         #Movement
         gravity_x = -GRAVITY if self.vel.x > 0 else GRAVITY
         
@@ -83,6 +85,7 @@ class Player(WorldInterface):
                 if self.rotation_speed < 90:
                     self.rotation_speed += 5
                 self.collision(wall)
+                hit_wall = True
 
         for bpadl in tiles['bpadl']:
             if collides_with(self.player.pos, (26,32), bpadl.pos, (40,40)):
@@ -94,14 +97,18 @@ class Player(WorldInterface):
             if collides_with(self.player.pos, (26,32), goal.pos, (40,40)):
                 return True
         
-        self.last_pos.x = self.player.pos.x
-        self.last_pos.y = self.player.pos.y
+        if hit_wall is False:        
+            self.last_pos.x = self.player.pos.x
+            self.last_pos.y = self.player.pos.y
         
         return False
        
     def collision(self, wall):
         diff_x = self.player.pos.x - wall.pos.x
         diff_y = self.player.pos.y - wall.pos.y
+
+        if self.player.pos.x == self.last_pos.x and self.player.pos.y == self.last_pos.y:
+            return
         
         self.player.pos.x = self.last_pos.x
         self.player.pos.y = self.last_pos.y
