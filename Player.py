@@ -17,14 +17,12 @@ class Player(WorldInterface):
         self.res = {}
         self.res['player_right'] = [load_image("res/player/standing_right.png"), \
                                     load_image("res/player/running_right_1.png"), \
-                                    load_image("res/player/running_right_2.png"), \
-                                    load_image("res/player/running_right_3.png"), \
-                                    load_image("res/player/running_right_4.png")]
+                                    load_image("res/player/standing_right.png"), \
+                                    load_image("res/player/running_right_3.png")]
         self.res['player_left'] = [load_image("res/player/standing_left.png"), \
                                     load_image("res/player/running_left_1.png"), \
-                                    load_image("res/player/running_left_2.png"), \
-                                    load_image("res/player/running_left_3.png"), \
-                                    load_image("res/player/running_left_4.png")]
+                                    load_image("res/player/standing_left.png"), \
+                                    load_image("res/player/running_left_3.png")]
 
         self.current_sprite = 0
         self.switch_frame_timer = 3
@@ -41,7 +39,7 @@ class Player(WorldInterface):
 
         self.switch_frame_timer -= 1
         if self.switch_frame_timer == 0:
-            self.current_sprite = (self.current_sprite + 1) % 5
+            self.current_sprite = (self.current_sprite + 1) % 4
             self.switch_frame_timer = 3
 
         if game_state['keyboard']['ctrl-up']:
@@ -72,15 +70,33 @@ class Player(WorldInterface):
 
         #Solid collision
         for wall in tiles['wall']:
-            if collides_with(self.player.pos, (28,35), wall.pos, (40,40)):
+            if collides_with(self.player.pos, (26,32), wall.pos, (40,40)):
                 if self.rotation_speed < 90:
                     self.rotation_speed += 5
+                self.collision(wall)
                 self.vel.x = 0
                 self.vel.y = 0
 
         #Win collision
         for goal in tiles['goal']:
-            if collides_with(self.player.pos, (28,35), goal.pos, (40,40)):
+            if collides_with(self.player.pos, (26,32), goal.pos, (40,40)):
                 return True
 
         return False
+       
+    def collision(self, wall):
+        diff_x = self.player.pos.x - wall.pos.x
+        diff_y = self.player.pos.y - wall.pos.y
+        
+        #Collision on x
+        if abs(diff_x) > abs(diff_y):
+            pass
+        #Collision on y
+        else:
+            pass
+        
+        #print("diff_x:", diff_x, " diff_y:", diff_y)
+            
+            
+            
+            
