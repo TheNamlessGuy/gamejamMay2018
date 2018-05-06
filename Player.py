@@ -8,11 +8,11 @@ GRAVITY = 0.6
 class Player(WorldInterface):
     def __init__(self, start_pos):
         WorldInterface.__init__(self)
-        
+
         #Player vars
         self.player = (Sprite(None, Vec2(start_pos.x, start_pos.y), (35, 35)))
         self.vel = Vec2(0,0)
-        
+
         #Res
         self.res = {}
         self.res['player_right'] = [load_image("res/player/standing_right.png"), \
@@ -30,18 +30,17 @@ class Player(WorldInterface):
         self.switch_frame_timer = 3
         self.current_res = 'player_right'
         self.player.image = self.res[self.current_res][self.current_sprite]
-        
+
     def update(self, game_state, tiles):
-        
+
         #Movement
         delta_vel = Vec2(0, 0)
 
         self.switch_frame_timer -= 1
         if self.switch_frame_timer == 0:
-            print "SWITCH FRAME"
             self.current_sprite = (self.current_sprite + 1) % 5
             self.switch_frame_timer = 3
-        
+
         if game_state['keyboard']['ctrl-up']:
             delta_vel.y -= VELSPEED
         if game_state['keyboard']['ctrl-down']:
@@ -58,22 +57,22 @@ class Player(WorldInterface):
             delta_vel.x += VELSPEED
 
         self.player.image = self.res[self.current_res][self.current_sprite]
-        
+
         self.vel.x += delta_vel.x
         self.vel.y += delta_vel.y
-        
+
         self.player.pos.x += self.vel.x
         self.player.pos.y += self.vel.y
-        
+
         #Solid collision
         for wall in tiles['wall']:
             if collides_with(self.player.pos, (28,35), wall.pos, (40,40)):
                 self.vel.x = 0
                 self.vel.y = 0
-        
+
         #Win collision
         for goal in tiles['goal']:
             if collides_with(self.player.pos, (28,35), goal.pos, (40,40)):
                 return True
-        
+
         return False
