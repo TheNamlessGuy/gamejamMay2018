@@ -73,8 +73,8 @@ class FinalEnd(WorldInterface):
             self.coyote_sprite.angle += 0.04
             self.coyote_sprite.pos.x += 0.05
             self.coyote_sprite.pos.y -= 0.2
-            if gs['keyboard']['ctrl-action']:
-                gs['keyboard']['ctrl-action'] -= 1
+            if gs['keyboard']['ctrl-reset']:
+                gs['keyboard']['ctrl-reset'] -= 1
                 return gs['screen-levelselect']
             return
         
