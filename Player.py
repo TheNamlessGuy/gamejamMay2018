@@ -89,7 +89,6 @@ class Player(WorldInterface):
 
         for bpadl in tiles['bpadl']:
             if collides_with(self.player.pos, (26,32), bpadl.pos, (40,40)):
-                print("LUL")
                 self.vel.x = -MAX_VEL
 
         #Win collision
