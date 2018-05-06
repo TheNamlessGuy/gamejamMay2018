@@ -83,14 +83,16 @@ class Player(WorldInterface):
                 if self.rotation_speed < 90:
                     self.rotation_speed += 5
                 self.collision(wall)
-                #self.vel.x = 0
-                #self.vel.y = 0
+
+        for bpadl in tiles['bpadl']:
+            if collides_with(self.player.pos, (26,32), bpadl.pos, (40,40)):
+                print("LUL")
+                self.vel.x = -MAX_VEL
 
         #Win collision
         for goal in tiles['goal']:
             if collides_with(self.player.pos, (26,32), goal.pos, (40,40)):
                 return True
-        
         
         self.last_pos.x = self.player.pos.x
         self.last_pos.y = self.player.pos.y
@@ -119,8 +121,5 @@ class Player(WorldInterface):
             else:
                 pass
         
-        print("diff_x:", diff_x, " diff_y:", diff_y)
-            
-            
-            
-            
+        #print("diff_x:", diff_x, " diff_y:", diff_y)
+
