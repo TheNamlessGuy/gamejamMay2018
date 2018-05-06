@@ -4,7 +4,7 @@ from Gspace import WorldInterface, Sprite, load_image, collides_with, Vec2
 
 MAX_VEL = 15
 VELSPEED = 1
-GRAVITY = 0.6
+GRAVITY = 0.2
 BOUNCE_MUL = 1.1
 
 class Player(WorldInterface):
@@ -14,6 +14,7 @@ class Player(WorldInterface):
         #Player vars
         self.player = (Sprite(None, Vec2(start_pos.x, start_pos.y), (35, 35)))
         self.vel = Vec2(0,0)
+        self.last_pos = Vec2(0,0)
 
         #Res
         self.res = {}
@@ -37,7 +38,10 @@ class Player(WorldInterface):
     def update(self, game_state, tiles):
 
         #Movement
-        delta_vel = Vec2(0, 0)
+        gravity_x = -GRAVITY if self.vel.x > 0 else GRAVITY
+        
+        
+        delta_vel = Vec2(gravity_x, GRAVITY)
 
         self.switch_frame_timer -= 1
         if self.switch_frame_timer == 0:
@@ -79,28 +83,43 @@ class Player(WorldInterface):
                 if self.rotation_speed < 90:
                     self.rotation_speed += 5
                 self.collision(wall)
-                self.vel.x = 0
-                self.vel.y = 0
+                #self.vel.x = 0
+                #self.vel.y = 0
 
         #Win collision
         for goal in tiles['goal']:
             if collides_with(self.player.pos, (26,32), goal.pos, (40,40)):
                 return True
-
+        
+        
+        self.last_pos.x = self.player.pos.x
+        self.last_pos.y = self.player.pos.y
+        
         return False
        
     def collision(self, wall):
         diff_x = self.player.pos.x - wall.pos.x
         diff_y = self.player.pos.y - wall.pos.y
         
+        self.player.pos.x = self.last_pos.x
+        self.player.pos.y = self.last_pos.y
+        
         #Collision on x
         if abs(diff_x) > abs(diff_y):
-            pass
+            self.vel.x = -self.vel.x * BOUNCE_MUL
+            if diff_x > 0:
+                pass
+            else:
+                pass
         #Collision on y
         else:
-            pass
+            self.vel.y = -self.vel.y * BOUNCE_MUL
+            if diff_y > 0:
+                pass
+            else:
+                pass
         
-        #print("diff_x:", diff_x, " diff_y:", diff_y)
+        print("diff_x:", diff_x, " diff_y:", diff_y)
             
             
             
