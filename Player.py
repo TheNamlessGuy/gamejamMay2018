@@ -2,8 +2,10 @@
 
 from Gspace import WorldInterface, Sprite, load_image, collides_with, Vec2
 
+MAX_VEL = 15
 VELSPEED = 1
 GRAVITY = 0.6
+BOUNCE_MUL = 1.1
 
 class Player(WorldInterface):
     def __init__(self, start_pos):
@@ -64,6 +66,9 @@ class Player(WorldInterface):
 
         self.vel.x += delta_vel.x
         self.vel.y += delta_vel.y
+        
+        self.vel.x = min(self.vel.x, MAX_VEL)
+        self.vel.y = min(self.vel.y, MAX_VEL)
 
         self.player.pos.x += self.vel.x
         self.player.pos.y += self.vel.y
